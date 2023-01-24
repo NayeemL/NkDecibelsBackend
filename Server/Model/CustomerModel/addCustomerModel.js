@@ -3,34 +3,13 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const addCustomer = new Schema({
-  fullName:{ 
-    type: String,
-    required: true
-  },
-  addressWithPincode:{ 
-    type: String,
-    required: true
-  },
-  landLine:{ 
-    type: String,
-    required: true
-  },
-  mobile:{ 
-    type: String,
-    required: true
-  },
-  whatsappNumber:{ 
-    type: String,
-    required: true
-  },
-  email:{ 
-    type: String,
-    required: true
-  },
-  gstinDetails:{ 
-    type: String,
-    required: true
-  },
+  fullName: String,
+  addressWithPincode:String,
+  landLine:String,
+  mobile:String,
+  whatsappNumber:String,
+  email:String,
+  gstinDetails:String
 });
 
 addCustomer.set("autoIndex", true);
