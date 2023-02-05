@@ -19,6 +19,6 @@ import addCustomer from "./Server/Routes/CustomerRoute/addCustomerRoute.js";
 
 
 // Admin app.use
-app.use("/addCustomer", addCustomer)
+app.use("/addCustomer", addCustomer);
 
 export default app;
