@@ -1,11 +1,8 @@
-import ProductDb from "../../Model/CustomerModel/addProductModel.js";
-
-const ImageModel = require('../../Model/CustomerModel/image');
-const ImageService = require('../../service/image')
+import ProductDb from "../../Model/ProductModel/addProductModel.js";
 
 export async function createProduct(req, res, next) {
   try {
-    const data = req.body;
+    const data = req.body
     const details = {
       name: data.name,
       price:data.price,
@@ -76,22 +73,15 @@ export async function deleteProduct(req, res, next) {
   }
 }
 
-    export async function singleImageUpload  (req, res) {
-
-    if(req.body.images){
-        const imageService = new ImageService()
-        req.body.images = imageService.singleImageUpload('image', req.body.images)
-    }
-        console.log(req.body.images)
-        //assign the value
-        const image = new ImageModel()
-        image.images = req.body.images
-        //save the user
-        await image.save();
-
-        res.status(200).send({
-            status: 200,
-            message: "Single Image Uploaded!"
-        })
+export async function uploadImage(req, res, next) {
+  try {
+    console.log("req.file", req.file);
+    const path = req.file.path;
+    res.status(201).json({
+      message: "added Successfully",
+      productImage: path,
+    });
+  } catch (error) {
+    next();
+  }
 }
-
