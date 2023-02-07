@@ -11,9 +11,9 @@ export async function createProduct(req, res, next) {
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
-      productImage:path.productImage
+      productImage:data.productImage
     };
-    const createProduct = await ProductDb.create(details);
+    const createProduct = await ProductDb.create(details); 
     res.status(201).json({
       message: "Product Created Successfully",
       data: createProduct,
@@ -38,15 +38,17 @@ export async function getProduct(req, res, next) {
 export async function updateProduct(req, res, next) {
   try {
     const data = req.body;
+    const file = req.body.file
     const id = req.params.id;
     const details = {
-        name: data.name,
+        productName: data.productName,
         price:data.price,
         description:data.description,
         cgst:data.cgst,
         igst:data.igst,
         sgst:data.sgst,
         vat:data.vat,
+        productImage:file.productImage
     };
     const updateProduct = await ProductDb.findByIdAndUpdate(id, details, {
       new: true,

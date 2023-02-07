@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const addProduct = new Schema({
-    name: {type:String, required:true},
-    price:{type:String, required:true},
-    description:{type:String, required:true},
-    cgst:{type:String, required:true},
-    igst:{type:String, required:true},
-    sgst:{type:String, required:true},
-    vat:{type:String, required:true},
-    productImage:{type:String, required:true},
+    productName: {type:String},
+    price:{type:String},
+    description:{type:String},
+    cgst:{type:String},
+    igst:{type:String},
+    sgst:{type:String},
+    vat:{type:String},
+    productImage:{type:String},
 });
 
 addProduct.set("autoIndex", true);
