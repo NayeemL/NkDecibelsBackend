@@ -42,6 +42,5 @@ import addProduct from "./Server/Routes/ProductRoute/addProductRoute.js"
 
 // Admin app.use
 app.use("/addCustomer", addCustomer)
-app.use("/addProduct", addProduct)
 
 export default app;
