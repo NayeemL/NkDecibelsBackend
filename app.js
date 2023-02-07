@@ -13,34 +13,45 @@ app.use(
   })
 );
 
+app.use(
+  express.urlencoded({
+    extended: false,
+    limit: "20mb",
+  })
+);
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      console.log("first", file);
-      cb(null, "/uploads");
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.fieldname + '-' + Date.now() + path.extname(filename.originalname))
-    }
-});
+// app.use('./public/ProductImage', express.static('uploads'));
 
-const upload = multer({storage:storage})
+//Image Store With Multer
+// const upload = multer({storage:storage});
 
-app.post('/ProductImage', upload.single )
-  
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       console.log(req.file)
+//       cb(null, ".public/ProductImage");
+//     },
+//     filename: (req, file, cb) => {
+//       cb(null, file.fieldname + '-' + Date.now() + path.extname(filename.originalname))
+//     }
+// });
 
+// const upload = multer({dest:'uploads/'});
 
-import path from "path";
-
-app.use(express.static(path.join("./", "/public")));
-app.use(bodyParser.json());
+// app.post('/ProductImage', upload.single('ProductImage'), function (req, res, next) {
+//   console.log(req.file)
+//   if(!req.file){
+//     res.status(500).send('sorry, cant find that');
+//   }
+//   else{
+//     res.status(200).send('uploaded successfully')
+//   }
+// })
 
 // Admin Routers
 import addCustomer from "./Server/Routes/CustomerRoute/addCustomerRoute.js";
-import addProduct from "./Server/Routes/ProductRoute/addProductRoute.js"
-
+import addProduct from "./Server/Routes/ProductRoute/addProductRoute.js";
 
 // Admin app.use
-app.use("/addCustomer", addCustomer)
+app.use("/addCustomer", addCustomer);
 
 export default app;
