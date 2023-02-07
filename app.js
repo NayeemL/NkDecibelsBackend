@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import cors from "cors";
-import multer from "multer";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -13,6 +12,7 @@ app.use(
   })
 );
 
+<<<<<<< HEAD
 app.use(
   express.urlencoded({
     extended: false,
@@ -46,12 +46,21 @@ app.use(
 //     res.status(200).send('uploaded successfully')
 //   }
 // })
+=======
+app.use('/public', express.static('public'));
+app.use(bodyParser.json());
+>>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
 
 // Admin Routers
 import addCustomer from "./Server/Routes/CustomerRoute/addCustomerRoute.js";
 import addProduct from "./Server/Routes/ProductRoute/addProductRoute.js";
 
 // Admin app.use
+<<<<<<< HEAD
 app.use("/addCustomer", addCustomer);
+=======
+app.use("/addCustomer", addCustomer)
+app.use("/addProduct", addProduct)
+>>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
 
 export default app;
