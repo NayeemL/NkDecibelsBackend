@@ -4,13 +4,14 @@ export async function createProduct(req, res, next) {
   try {
     const data = req.body
     const details = {
-      name: data.name,
+      productName: data.productName,
       price:data.price,
       description:data.description,
       cgst:data.cgst,
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
+      productImage:path.productImage
     };
     const createProduct = await ProductDb.create(details);
     res.status(201).json({
