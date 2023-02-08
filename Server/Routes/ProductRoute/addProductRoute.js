@@ -18,7 +18,7 @@ import {createProduct, getProduct, updateProduct, deleteProduct} from "../../Con
 
 import upload from "../../middleware/multer.js"
 
-router.route("/createProduct", upload).post(createProduct);
+router.route("/createProduct").post(createProduct);
 router.route("/getProduct").get(getProduct);
 router.route("/updateProduct/:id").put(updateProduct);
 router.route("/deleteProduct/:id").delete(deleteProduct);
