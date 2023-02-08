@@ -4,12 +4,6 @@ import { Router } from "express";
 const router = Router();
 import {createProduct, getProduct, updateProduct, deleteProduct} from "../../Controller/ProductController/addProductController.js";
 
-<<<<<<< HEAD
-import {createProduct} from "../../Controller/ProductController/addProductController.js";
-import { getProduct } from "../../Controller/ProductController/addProductController.js";
-import { updateProduct } from "../../Controller/ProductController/addProductController.js";
-import { deleteProduct } from "../../Controller/ProductController/addProductController.js"; 
-=======
 // const storage = multer.diskStorage({
 //     destination: function(req, res, cb){
 //         cd(null, 'public/ProductImage')
@@ -21,7 +15,6 @@ import { deleteProduct } from "../../Controller/ProductController/addProductCont
 // // , upload.single('FileList')
 
 // const upload = multer({storage:storage});
->>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
 
 import upload from "../../middleware/multer.js"
 

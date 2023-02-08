@@ -12,16 +12,9 @@ export async function createProduct(req, res, next) {
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
-<<<<<<< HEAD
-      productImage:Path.productImage,
-    }
-
-    const createProduct = await ProductDb.create(details);
-=======
       productImage:data.productImage
     };
     const createProduct = await ProductDb.create(details); 
->>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
     res.status(201).json({
       message: "Product Created Successfully",
       data: createProduct,
@@ -46,11 +39,7 @@ export async function getProduct(req, res, next) {
 export async function updateProduct(req, res, next) {
   try {
     const data = req.body;
-<<<<<<< HEAD
-    const Path = req.file.Path
-=======
     const file = req.body.file
->>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
     const id = req.params.id;
     const details = {
         productName: data.productName,
@@ -60,11 +49,7 @@ export async function updateProduct(req, res, next) {
         igst:data.igst,
         sgst:data.sgst,
         vat:data.vat,
-<<<<<<< HEAD
-        productImage:Path.productImage,
-=======
         productImage:file.productImage
->>>>>>> b3d797ab2c00b0099b82700122a7612b3a6b80a5
     };
     const updateProduct = await ProductDb.findByIdAndUpdate(id, details, {
       new: true,
