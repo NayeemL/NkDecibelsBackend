@@ -1,9 +1,10 @@
 import ProductDb from "../../Model/ProductModel/addProductModel.js";
 
 export async function createProduct(req, res, next) {
+ 
   try {
+    const path = req.file;
     const data = req.body
-    // const Path = req.file.path
     const details = {
       productName: data.productName,
       price:data.price,
@@ -12,7 +13,7 @@ export async function createProduct(req, res, next) {
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
-      productImage:data.productImage
+      productImage:path.productImage
     };
     const createProduct = await ProductDb.create(details); 
     res.status(200).json({

@@ -12,7 +12,8 @@ app.use(
   })
 );
 
-app.use('/public', express.static('public'));
+app.use(express.static(path.join("./", "/public")));
+import path from "path";
 app.use(bodyParser.json());
 
 // Admin Routers
