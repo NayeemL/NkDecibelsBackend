@@ -13,7 +13,7 @@ export async function createCustomer(req, res, next) {
       gstinDetails:data.gstinDetails
     };
     const createCustomer = await CustomerDb.create(details);
-    res.status(201).json({
+    res.status(200).json({
       message: "Customer Created Successfully",
       data: createCustomer,
     });
