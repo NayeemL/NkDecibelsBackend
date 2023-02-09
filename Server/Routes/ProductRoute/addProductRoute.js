@@ -1,24 +1,37 @@
 import { Router } from "express";
-// import multer from "multer";
-// import bodyParser from "body-parser";
+import multer from "multer";
+import path from "path"
 const router = Router();
 import {createProduct, getProduct, updateProduct, deleteProduct} from "../../Controller/ProductController/addProductController.js";
 
-// const storage = multer.diskStorage({
-//     destination: function(req, res, cb){
-//         cd(null, 'public/ProductImage')
-//     },
-//     filename: function(req, res, cb){
-//         cb(null, Date.now()+'_'+file.originalname)
-//     }
-// })
-// // , upload.single('FileList')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '.jpg') //Appending .jpg
+    }
+  });
+  
+  
+  const fileFilter = (req, file, cb) => {
+      var ext = path.extname(file.originalname);
+      if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+         return cb(new Error('Only images are allowed'))
+      }
+      cb(null, true)
+  };
+  
+  
+  const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter,
+   limit:{
+   fieldSize: 1*1024*1024 //1 MB
+   }
+  });
 
-// const upload = multer({storage:storage});
-
-import upload from "../../middleware/multer.js"
-
-router.route("/createProduct").post(createProduct);
+router.post("/createProduct",upload.single('productImage'), createProduct);
 router.route("/getProduct").get(getProduct);
 router.route("/updateProduct/:id").put(updateProduct);
 router.route("/deleteProduct/:id").delete(deleteProduct);

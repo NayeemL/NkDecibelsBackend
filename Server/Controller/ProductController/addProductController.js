@@ -1,9 +1,17 @@
 import ProductDb from "../../Model/ProductModel/addProductModel.js";
+import ImageService from "../../service/images.js"
 
 export async function createProduct(req, res, next) {
-  try {
+    if(req.body.productImage){
+    const imageService = new ImageService()
+    req.body.productImage = imageService.singleImageUpload('image', req.body.productImage)
+    }
+    console.log(req.body.productImage)
+    const image = new ProductDb()
+    image.productImage = req.body.productImage
+    await image.save();
+    try {
     const data = req.body
-    // const Path = req.file.path
     const details = {
       productName: data.productName,
       price:data.price,
@@ -12,7 +20,6 @@ export async function createProduct(req, res, next) {
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
-      productImage:data.productImage
     };
     const createProduct = await ProductDb.create(details); 
     res.status(200).json({
