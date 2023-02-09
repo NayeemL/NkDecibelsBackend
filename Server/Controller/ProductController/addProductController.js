@@ -7,9 +7,7 @@ export async function createProduct(req, res, next) {
     req.body.productImage = imageService.singleImageUpload('image', req.body.productImage)
     }
     console.log(req.body.productImage)
-    const image = new ProductDb()
-    image.productImage = req.body.productImage
-    await image.save();
+    
     try {
     const data = req.body
     const details = {
@@ -20,6 +18,7 @@ export async function createProduct(req, res, next) {
       igst:data.igst,
       sgst:data.sgst,
       vat:data.vat,
+      productImage: data.productImage
     };
     const createProduct = await ProductDb.create(details); 
     res.status(200).json({

@@ -1,5 +1,4 @@
 import fs from 'fs'
-
 class ImagesService {
 
     singleImageUpload = (imagePath, base64Image = null) => {
