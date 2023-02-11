@@ -7,7 +7,8 @@ const addUser = new Schema({
     email:String,
     password:String,
     cnfpassword:String,
-    userRole:String
+    role:String,
+    userId: mongoose.Schema.Types.ObjectId,
 });
 
 addUser.set("autoIndex", true);

@@ -14,7 +14,7 @@ app.use(
 
 app.use(express.static(path.join("./", "/public")));
 import path from "path";
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // Admin Routers
 import addCustomer from "./Server/Routes/CustomerRoute/addCustomerRoute.js";
