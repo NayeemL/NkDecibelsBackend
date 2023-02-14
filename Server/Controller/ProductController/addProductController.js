@@ -82,3 +82,19 @@ export async function deleteProduct(req, res, next) {
     next();
   }
 }
+
+
+export async function getProductData(req, res, next) {
+  try {
+    const data = req.body;
+    const productId = data.id;
+    const getoneProductid = await ProductDb.findById(productId);
+      res.status(200).json({
+        message: "get Customer Successfully",
+        data: getoneProductid,
+      });
+  } catch (err) {
+    console.log(err);
+    next();
+  }
+}

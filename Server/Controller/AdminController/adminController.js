@@ -1,35 +1,27 @@
-import UserDb from "../../Model/userModel/userModel.js";
 import { generateToken } from "../../middleware/auth.js";
-import bcrypt from "bcryptjs";
-import UserLoginDb from "../../Model/userModel/userLoginModel.js";
+import bcrypt from "bcrypt";
+import adminLoginDB from "../../Model/AdminModel/adminModel.js";
 
-export async function createUser(req, res, next) {
+export async function userSignup(req, res, next) {
   try {
     const data = req.body;
     const salt = await bcrypt.genSaltSync(10);
     const password = await data.password;
-    const existUser = await UserDb.findOne({ email: data.email });
+    const existUser = await adminLoginDB.findOne({ email: data.email });
     const details = {
-      username: data.username,
+      role: "admin",
       email: data.email,
-      password: bcrypt.hashSync(password, salt),
-      cnfpassword: bcrypt.hashSync(password, salt),
-      role: data.role,
+      password: bcrypt.hashSync(password, salt)
     };
     if (existUser) {
       res.status(409).json({
-        message: "user already exist",  
+        message: "user already exist",
         data: existUser,
       });
     } else {
-      
-      const createUser = await UserDb.create(details);
-      await UserLoginDb.create({
-        email: data.email,
-        password: bcrypt.hashSync(password, salt),
-        role: data.role,
-        userId: createUser._id,
-      });
+      const createUser = await adminLoginDB.create(details);
+      console.log("createUser", createUser);
+
       res.status(201).json({
         message: "User Created Successfully",
         data: createUser,
@@ -40,74 +32,60 @@ export async function createUser(req, res, next) {
     next();
   }
 }
-export async function getUser(req, res, next) {
+export async function getList(req, res, next) {
   try {
-    const getUser = await UserDb.find();
-    res.status(200).json({
-      message: "get successfully",
-      data: getUser,
+    const getemployeelist = await adminLoginDB.find();
+    generateToken({ data: getemployeelist }).then((data) => {
+      res.status(200).json({
+        message: "get successfully",
+        data: data,
+      });
     });
   } catch (err) {
     next();
   }
 }
 
-export async function getoneUser(req, res) {
-  try {
-    const data = req.params;
-    const userId = data.id;
-    const usergetoneid = await UserLoginDb.findById(userId);
-    res.status(200).json({
-      message: "get Successfully",
-      data: usergetoneid,
-    });
-  } catch (e) {
-    throw e;
-  }
-}
-
-
-export async function updateUser(req, res, next) {
+export async function updateEmployee(req, res, next) {
   try {
     const data = req.body;
     const id = req.params.id;
+
     const details = {
-      username: data.username,
+      role: "admin",
       email: data.email,
       password: data.password,
-      cnfpassword: data.cnfpassword,
-      userRole: data.userRole,
     };
-    const updateUser = await UserDb.findByIdAndUpdate(id, details, {
+    const updateList = await adminLoginDB.findByIdAndUpdate(id, details, {
       new: true,
     });
     res.status(200).json({
       message: "create successfully",
-      data: updateUser,
+      data: updateList,
     });
   } catch (err) {
     next();
   }
 }
 
-export async function deleteUser(req, res, next) {
+export async function deleteEmployee(req, res, next) {
   try {
     const data = req.params;
-    const UserId = data.id;
-    const deleteUser = await UserDb.findByIdAndDelete(UserId);
+    const employeeId = data.id;
+    const employeeDelete = await adminLoginDB.findByIdAndDelete(employeeId);
     res.status(200).json({
       message: "Deleted Successfully",
-      data: deleteUser,
+      data: employeeDelete,
     });
   } catch (error) {
     next();
   }
 }
 
-export async function userLogin(req, res, next) {
+export async function adminLogin(req, res, next) {
   try {
     const data = req.body;
-    const existUser = await UserLoginDb.findOne({
+    const existUser = await adminLoginDB.findOne({
       email: data.email,
       role: data.role,
     });
@@ -120,7 +98,7 @@ export async function userLogin(req, res, next) {
           if (checkPassword) {
             generateToken({ email: existUser.email }).then((token) => {
               res.status(200).json({
-                message: "Employer login successfully",
+                message: "Admin login successfully",
                 userName: existUser.role,
                 data: existUser,
                 token: token,

@@ -5,7 +5,7 @@ import { createUser, deleteUser, getoneUser, getUser, updateUser, userLogin } fr
 import { authenticateToken } from "../../middleware/auth.js";
 
 router.route("/createUser").post(createUser);
-router.route("/getUser").get(getUser);
+router.route("/getUser").get(getUser, authenticateToken);
 router.route("/getone/:id").get(getoneUser);
 router.route("/updateUser/:id").put(updateUser);
 router.route("/deleteUser/:id").delete(deleteUser);
