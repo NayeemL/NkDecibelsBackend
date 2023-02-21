@@ -49,12 +49,14 @@ export async function getList(req, res, next) {
 export async function updateEmployee(req, res, next) {
   try {
     const data = req.body;
+    const salt = await bcrypt.genSaltSync(10);
+    const password = await data.password;
     const id = req.params.id;
 
     const details = {
       role: "admin",
       email: data.email,
-      password: data.password,
+      password: bcrypt.hashSync(password, salt)
     };
     const updateList = await adminLoginDB.findByIdAndUpdate(id, details, {
       new: true,

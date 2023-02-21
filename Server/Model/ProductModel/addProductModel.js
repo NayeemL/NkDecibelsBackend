@@ -4,12 +4,12 @@ const { Schema, model } = mongoose;
 
 const addProduct = new Schema({
     productName: {type:String},
-    price:{type:String},
+    price:{type:Number},
     description:{type:String},
-    cgst:{type:String},
-    igst:{type:String},
-    sgst:{type:String},
-    vat:{type:String},
+    cgst:{type:Number},
+    igst:{type:Number},
+    sgst:{type:Number},
+    vat:{type:Number},
     productImage:{type:String},
 });
 

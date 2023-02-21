@@ -48,6 +48,7 @@ export async function getoneCustomer (req, res, next){
     }
 }
 
+
 export async function updateCustomer(req, res, next) {
   try {
     const data = req.body;

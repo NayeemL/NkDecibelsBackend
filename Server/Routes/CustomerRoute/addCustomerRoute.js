@@ -10,6 +10,7 @@ router.route("/createCustomer").post(createCustomer);
 router.route("/getCustomer").get(getCustomer);
 router.route("/updateCustomer/:id").put(updateCustomer);
 router.route("/deleteCustomer/:id").delete(deleteCustomer);
+router.route("/customer_getone/:id").get(getoneCustomer);
 router.route("/getoneCustomer").post(getCustomerData);
 
 export default router;
