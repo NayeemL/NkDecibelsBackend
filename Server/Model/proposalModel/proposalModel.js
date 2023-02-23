@@ -15,9 +15,10 @@ const addProposal = new Schema({
     quotationTitle:{type:String},
     date:{type:String},
     place:{type:String},
+    quotationTitle:{type:String},
     productItems:[
     {
-        createId:String,
+        id:String,
         subheader:String,
         description:String,
         quantity:String,
@@ -33,7 +34,8 @@ const addProposal = new Schema({
     shipping:{type:String},
     grandTotal:{type:String},
     note:{type:String},
-    terms:{type:String}
+    terms:{type:String},
+    status:{type:String},
 });
 
 addProposal.set("autoIndex", true);

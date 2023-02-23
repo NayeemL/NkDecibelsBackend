@@ -17,6 +17,7 @@ export async function createProposal(req, res, next) {
       quotationTitle: data.quotationTitle,
       date: data.date,
       place: data.place,
+      quotationTitle:data.quotationTitle,
       productItems: [
         {
           subheader: data.subheader,
@@ -35,6 +36,7 @@ export async function createProposal(req, res, next) {
       grandTotal: data.grandTotal,  
       note: data.note,
       terms: data.terms,
+      status:data.status,
     };
     const createProposal = await ProposalDb.create(details);
     res.status(200).json({
@@ -118,6 +120,7 @@ export async function updateProposal(req, res, next) {
       grandTotal: data.grandTotal,
       note: data.note,
       terms: data.terms,
+      status:data.status
     };
     const updateProposal = await ProposalDb.findByIdAndUpdate(id, details, {
       new: true,
