@@ -13,7 +13,7 @@ const user = new Schema({
 
 user.set("autoIndex", true);
 
-const UserLoginDb = model("user", user);
+const UserLoginDb = model("user", user);    
 UserLoginDb.createIndexes();
 
 export default UserLoginDb;

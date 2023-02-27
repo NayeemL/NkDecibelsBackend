@@ -1,4 +1,3 @@
-import UserDb from "../../Model/userModel/userModel.js";
 import { generateToken } from "../../middleware/auth.js";
 import bcrypt from "bcryptjs";
 import UserLoginDb from "../../Model/userModel/userLoginModel.js";
@@ -8,7 +7,7 @@ export async function createUser(req, res, next) {
     const data = req.body;
     const salt = await bcrypt.genSaltSync(10);
     const password = await data.password;
-    const existUser = await UserDb.findOne({ email: data.email });
+    const existUser = await UserLoginDb.findOne({ email: data.email });
     const details = {
       username: data.username,
       email: data.email,
@@ -18,18 +17,12 @@ export async function createUser(req, res, next) {
     };
     if (existUser) {
       res.status(409).json({
-        message: "user already exist",  
+        message: "user already exist",
         data: existUser,
       });
     } else {
-      
-      const createUser = await UserDb.create(details);
-      await UserLoginDb.create({
-        email: data.email,
-        password: bcrypt.hashSync(password, salt),
-        role: data.role,
-        userId: createUser._id,
-      });
+      const createUser = await UserLoginDb.create(details);
+      console.log("createUser", createUser);
       res.status(201).json({
         message: "User Created Successfully",
         data: createUser,
@@ -40,9 +33,10 @@ export async function createUser(req, res, next) {
     next();
   }
 }
+
 export async function getUser(req, res, next) {
   try {
-    const getUser = await UserDb.find();
+    const getUser = await UserLoginDb.find();
     res.status(200).json({
       message: "get successfully",
       data: getUser,
@@ -78,7 +72,7 @@ export async function updateUser(req, res, next) {
       cnfpassword: data.cnfpassword,
       userRole: data.userRole,
     };
-    const updateUser = await UserDb.findByIdAndUpdate(id, details, {
+    const updateUser = await UserLoginDb.findByIdAndUpdate(id, details, {
       new: true,
     });
     res.status(200).json({
@@ -94,7 +88,7 @@ export async function deleteUser(req, res, next) {
   try {
     const data = req.params;
     const UserId = data.id;
-    const deleteUser = await UserDb.findByIdAndDelete(UserId);
+    const deleteUser = await UserLoginDb.findByIdAndDelete(UserId);
     res.status(200).json({
       message: "Deleted Successfully",
       data: deleteUser,
