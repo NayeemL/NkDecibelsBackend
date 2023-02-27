@@ -29,6 +29,7 @@ const addProposal = new Schema({
     ],
     subTotal:{type:String},
     discountvalue:{type:String},
+    discountType:{type:String},
     afterDiscount:{type:String},
     gst:{type:String},
     shipping:{type:String},
