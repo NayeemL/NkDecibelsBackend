@@ -13,7 +13,7 @@ export async function createProposal(req, res, next) {
       length: data.length,
       width: data.width,
       depth: data.depth,
-      puropose: data.puropose,
+      purpose: data.purpose,
       quotationTitle: data.quotationTitle,
       date: data.date,
       place: data.place,

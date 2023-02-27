@@ -6,10 +6,12 @@ const app = express();
 app.use(cors());
 
 app.use(
-  json({
+  express.json({
     limit: "25MB",
   })
 );
+
+app.use(express.urlencoded({extended:true}));
 
 app.use(express.static(path.join("./", "/public")));
 import path from "path";

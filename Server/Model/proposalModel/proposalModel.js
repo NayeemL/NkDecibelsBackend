@@ -11,7 +11,7 @@ const addProposal = new Schema({
     length:{type:String},
     width:{type:String},
     depth:{type:String},
-    puropose:{type:String},
+    purpose:{type:String},
     quotationTitle:{type:String},
     date:{type:String},
     place:{type:String},
