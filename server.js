@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 
 // connect is used to connect DB
-mongoose.set('strictQuery', true);
+// mongoose.set('strictQuery', true);
 
 const { connect } = mongoose;
 
