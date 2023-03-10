@@ -8,7 +8,7 @@ mongoose.set('strictQuery', true);
 const { connect } = mongoose;
 
 config({
-  path: "./.example.env",
+  path: "./.env",
 });
 
 const database = process.env.DATABASE;
