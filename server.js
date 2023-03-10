@@ -7,7 +7,15 @@ mongoose.set('strictQuery', true);
 
 const { connect } = mongoose;
 
-connect("mongodb+srv://nayeem:555666777aA@cluster0.0pmvijn.mongodb.net/test", {
+config({
+  path: "./.env",
+});
+
+const database = process.env.DATABASE;
+
+const port = process.env.PORT;
+
+connect(database, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   
@@ -15,6 +23,6 @@ connect("mongodb+srv://nayeem:555666777aA@cluster0.0pmvijn.mongodb.net/test", {
   console.log("DB Connected");
 });
 
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("Connected");
 });
